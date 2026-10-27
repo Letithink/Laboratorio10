@@ -1,6 +1,8 @@
-﻿namespace AppLS10.domain.Puertos;
+using AppLS10.domain.Entities;
 
-public interface IRoleRepository
+namespace AppLS10.domain.Puertos;
+
+public interface IRoleRepository : IRepository<Role>
 {
-    
+    Task<Role?> GetByNameAsync(string roleName);
 }

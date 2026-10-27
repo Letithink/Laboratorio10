@@ -1,6 +1,8 @@
-﻿namespace AppLS10.domain.Puertos;
+using AppLS10.domain.Entities;
 
-public interface ITicketRepository
+namespace AppLS10.domain.Puertos;
+
+public interface ITicketRepository : IRepository<Ticket>
 {
-    
+    Task<IEnumerable<Ticket>> GetByUserIdAsync(Guid userId);
 }
