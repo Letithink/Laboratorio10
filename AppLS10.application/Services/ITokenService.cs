@@ -1,6 +1,6 @@
-﻿namespace AppLS10.application.Services;
+namespace AppLS10.application.Services;
 
-public class ITokenService
+public interface ITokenService
 {
-    
+    string GenerateToken(Guid userId, string username, IEnumerable<string> roles);
 }
