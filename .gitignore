@@ -1,0 +1,30 @@
+## Build output
+bin/
+obj/
+/packages/
+
+## Rider / JetBrains
+.idea/
+riderModule.iml
+/_ReSharper.Caches/
+*.DotSettings.user
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Secrets y configuración local
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+## Logs
+*.log
+logs/
+
+## OS
+.DS_Store
+Thumbs.db
