@@ -8,7 +8,6 @@ namespace AppLS10.api.Controllers;
 
 [ApiController]
 [Route("api/tickets")]
-[Route("api/[controller]")]
 public class TicketController : ControllerBase
 {
     private readonly CreateTicketUseCase _createTicketUseCase;

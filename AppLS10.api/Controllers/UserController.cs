@@ -7,7 +7,6 @@ namespace AppLS10.api.Controllers;
 
 [ApiController]
 [Route("api/users")]
-[Route("api/[controller]")]
 [Authorize(Policy = "AdminOnly")]
 public class UserController : ControllerBase
 {

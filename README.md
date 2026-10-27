@@ -124,6 +124,112 @@ Al registrarse, el usuario recibe el rol `User` por defecto.
 
 ---
 
+## Pruebas en Swagger
+
+### Registro de usuario
+**POST** `/api/auth/register`
+```json
+{
+  "username": "leticia",
+  "password": "123456",
+  "email": "leticia@correo.com"
+}
+```
+**Response 200:**
+```json
+{
+  "userId": "a1b2c3d4-...",
+  "username": "leticia",
+  "email": "leticia@correo.com",
+  "createdAt": "2026-10-27T06:00:00Z",
+  "roles": ["User"]
+}
+```
+
+---
+
+### Login
+**POST** `/api/auth/login`
+```json
+{
+  "username": "leticia",
+  "password": "123456"
+}
+```
+**Response 200:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "username": "leticia",
+  "roles": ["User"]
+}
+```
+
+> El token se pega en el botón **Authorize** de Swagger para acceder a los endpoints protegidos.
+
+---
+
+### Crear ticket (requiere token)
+**POST** `/api/tickets`
+```json
+{
+  "title": "No puedo iniciar sesión",
+  "description": "Me aparece error 401 al intentar entrar al sistema"
+}
+```
+**Response 201:**
+```json
+{
+  "ticketId": "f7e6d5c4-...",
+  "userId": "a1b2c3d4-...",
+  "title": "No puedo iniciar sesión",
+  "description": "Me aparece error 401 al intentar entrar al sistema",
+  "status": "abierto",
+  "createdAt": "2026-10-27T06:05:00Z",
+  "closedAt": null
+}
+```
+
+---
+
+### Cambiar estado de ticket (solo Admin)
+**PUT** `/api/tickets/{id}/status`
+```json
+{
+  "status": "en_proceso"
+}
+```
+**Response 200:**
+```json
+{
+  "ticketId": "f7e6d5c4-...",
+  "status": "en_proceso",
+  ...
+}
+```
+
+---
+
+### Agregar respuesta a un ticket (solo Admin)
+**POST** `/api/responses/{ticketId}`
+```json
+{
+  "message": "Revisamos tu caso, en breve lo solucionamos."
+}
+```
+**Response 201:**
+```json
+{
+  "responseId": "c1d2e3f4-...",
+  "ticketId": "f7e6d5c4-...",
+  "responderId": "admin-uuid-...",
+  "message": "Revisamos tu caso, en breve lo solucionamos.",
+  "createdAt": "2026-10-27T06:10:00Z"
+}
+```
+
+---
+
 ## Stack
 
 - ASP.NET Core 10
@@ -131,3 +237,31 @@ Al registrarse, el usuario recibe el rol `User` por defecto.
 - JWT Bearer Authentication
 - BCrypt para hashing de contraseñas
 - Swagger / OpenAPI
+
+---
+
+## Evidencias de Pruebas en Swagger
+
+### 1. Registro de Usuario (`POST /api/Auth/register`)
+![Registro de Usuario](AppLS10.api/imagenes/register.png)
+
+### 2. Autenticación y Obtención de Token JWT (`POST /api/Auth/login`)
+![Login con JWT](AppLS10.api/imagenes/login.png)
+
+### 3. Información del Usuario Autenticado (`GET /api/Auth/me`)
+![Información del Usuario](AppLS10.api/imagenes/auth-me.png)
+
+### 4. Creación de Ticket (`POST /api/tickets`)
+![Creación de Ticket](AppLS10.api/imagenes/crear-ticket.png)
+
+### 5. Obtener Mis Tickets (`GET /api/tickets/my-tickets`)
+![Mis Tickets](AppLS10.api/imagenes/mis-tickets.png)
+
+### 6. Actualización de Estado de Ticket (`PUT /api/tickets/{id}/status`)
+![Actualizar Estado](AppLS10.api/imagenes/actualizar-estado.png)
+
+### 7. Enviar Respuesta a un Ticket (`POST /api/tickets/{ticketId}/responses`)
+![Responder Ticket](AppLS10.api/imagenes/responder-ticket.png)
+
+### 8. Listar Usuarios (`GET /api/users`)
+![Listar Usuarios](AppLS10.api/imagenes/listar-usuarios.png)

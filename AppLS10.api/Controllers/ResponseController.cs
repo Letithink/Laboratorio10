@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace AppLS10.api.Controllers;
 
 [ApiController]
-[Route("api/ticket/{ticketId:guid}/response")]
 [Route("api/tickets/{ticketId:guid}/responses")]
 [Authorize(Policy = "AdminOrUser")]
 public class ResponseController : ControllerBase
